@@ -42,17 +42,20 @@ paper      vs   scissors:   scissor wins; you lose
 function getComputerChoice() {
     let computerChoiceNumber = Math.floor(Math.random() * 3 + 1);
     if (computerChoiceNumber == 1) {
-        return 'Rock'
+        return 'Rock';
     } else if (computerChoiceNumber == 2) {
-        return 'Paper'
+        return 'Paper';
     } else {
-        return 'Scissors'
+        return 'Scissors';
     }
     
 }
-
+console.log(getComputerChoice());
 
 function gameRound(playerSelection, computerSelection) {
+    playerSelection = playerSelection.toLowerCase(); // Makes player selection lowercase so it wont be affected by case sensitivity
+    computerSelection = computerSelection.toLowerCase(); // Makes computer selection lowercase so it wont be affected by case sensitivity
+
     if (playerSelection == computerSelection) {
         return 'It is a tie!';
     } else if (playerSelection == 'rock' && computerSelection == 'paper') {
@@ -69,7 +72,7 @@ function gameRound(playerSelection, computerSelection) {
         return 'You Lose! Scissors beats Paper';
     }
 }
-
+console.log(gameRound('PaPer', 'ScIssors'));
 
 </script>
 
