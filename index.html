@@ -25,6 +25,16 @@ step 3: code checks if you chose rock paper or scissors and stores choice in var
 step 4: code checks variable choice made by player against random guess (paper beats rock, rock beats scissors, scissors beat paper, if answers are the same it is a tie)
 step 5: prints result to console.
 
+human  computer
+
+rock       vs   paper :     paper wins;   you lose
+rock       vs   scissors:   rock wins;    you win
+scissors   vs   rock:       rock wins;    you lose
+scissors   vs   paper:      scissor wins; you win
+paper      vs   rock:       paper wins;   you win
+paper      vs   scissors:   scissor wins; you lose
+
+
 
 
 
@@ -39,7 +49,26 @@ function getComputerChoice() {
         return 'Scissors'
     }
     
-};
+}
+
+
+function gameRound(playerSelection, computerSelection) {
+    if (playerSelection == computerSelection) {
+        return 'It is a tie!';
+    } else if (playerSelection == 'rock' && computerSelection == 'paper') {
+        return 'You Lose! Paper beats Rock';
+    } else if (playerSelection == 'rock' && computerSelection == 'scissors') {
+        return 'You Win! Rock beats Scissors';
+    } else if (playerSelection == 'scissors' && computerSelection == 'rock') {
+        return 'You Lose! Rock beats Scissors';
+    } else if (playerSelection == 'scissors' && computerSelection == 'paper') {
+        return 'You Win! Scissors beats Paper';
+    } else if (playerSelection == 'paper' && computerSelection == 'rock') {
+        return 'You Win! Paper beats Rock';
+    } else if (playerSelection == 'paper' && computerSelection == 'scissors') {
+        return 'You Lose! Scissors beats Paper';
+    }
+}
 
 
 </script>
