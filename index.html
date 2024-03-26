@@ -39,7 +39,7 @@ paper      vs   scissors:   scissor wins; you lose
 
 
 */
-
+let score = 0;
 
 function getComputerChoice() {
     let computerChoiceNumber = Math.floor(Math.random() * 3 + 1);
@@ -60,43 +60,78 @@ function gameRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase(); // Makes player selection lowercase so it wont be affected by case sensitivity
     computerSelection = computerSelection.toLowerCase(); // Makes computer selection lowercase so it wont be affected by case sensitivity
 
+
+
     if (playerSelection == computerSelection) {
         return 'It is a tie!';
     } else if (playerSelection == 'rock' && computerSelection == 'paper') {
         return 'You Lose! Paper beats Rock';
     } else if (playerSelection == 'rock' && computerSelection == 'scissors') {
+        score = score + 1;
         return 'You Win! Rock beats Scissors';
     } else if (playerSelection == 'scissors' && computerSelection == 'rock') {
         return 'You Lose! Rock beats Scissors';
     } else if (playerSelection == 'scissors' && computerSelection == 'paper') {
+        score = score + 1;
         return 'You Win! Scissors beats Paper';
     } else if (playerSelection == 'paper' && computerSelection == 'rock') {
+        score = score + 1;
         return 'You Win! Paper beats Rock';
     } else if (playerSelection == 'paper' && computerSelection == 'scissors') {
         return 'You Lose! Scissors beats Paper';
     } else {
         return 'That is not an option, please try again.';
     }
+    
 }
 
 
 
+
 // function below is the cycle of one round
+function playRound() {
+    let playerSelection = prompt('Choose One Please: Rock, Paper, or Scissors');
+    let computerSelection = getComputerChoice();
+    console.log(`Player Selects: ${playerSelection}`);
+    console.log(`Computer Selects: ${computerSelection}`);
+    console.log(gameRound(playerSelection, computerSelection));
+    console.log(`player score is ${score}`);
+    
+}
+
+
+
 function playGame() {
+playRound();
+playRound();
+playRound();
+playRound();
+playRound();
+}
+
+playGame();
+
+/*
+// running the round 5 times
+let playerScore = playGame();
+playGame();
+playGame();
+playGame();
+playGame();
+
+
+
+// function below is the cycle of one round
+function playRound() {
     let playerSelection = prompt('Choose One Please: Rock, Paper, or Scissors');
     let computerSelection = getComputerChoice();
     console.log(playerSelection);
     console.log(computerSelection);
     alert(gameRound(playerSelection, computerSelection));
+
+
 }
-
-// running the round 5 times
-playGame();
-playGame();
-playGame();
-playGame();
-playGame();
-
+*/
 </script>
 
 </body>
