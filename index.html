@@ -40,6 +40,7 @@ paper      vs   scissors:   scissor wins; you lose
 
 */
 let score = 0;
+let computerScore = 0;
 
 function getComputerChoice() {
     let computerChoiceNumber = Math.floor(Math.random() * 3 + 1);
@@ -65,11 +66,13 @@ function gameRound(playerSelection, computerSelection) {
     if (playerSelection == computerSelection) {
         return 'It is a tie!';
     } else if (playerSelection == 'rock' && computerSelection == 'paper') {
+        computerScore = computerScore + 1;
         return 'You Lose! Paper beats Rock';
     } else if (playerSelection == 'rock' && computerSelection == 'scissors') {
         score = score + 1;
         return 'You Win! Rock beats Scissors';
     } else if (playerSelection == 'scissors' && computerSelection == 'rock') {
+        computerScore = computerScore + 1;
         return 'You Lose! Rock beats Scissors';
     } else if (playerSelection == 'scissors' && computerSelection == 'paper') {
         score = score + 1;
@@ -79,6 +82,7 @@ function gameRound(playerSelection, computerSelection) {
         return 'You Win! Paper beats Rock';
     } else if (playerSelection == 'paper' && computerSelection == 'scissors') {
         return 'You Lose! Scissors beats Paper';
+        computerScore = computerScore + 1;
     } else {
         return 'That is not an option, please try again.';
     }
@@ -95,7 +99,7 @@ function playRound() {
     console.log(`Player Selects: ${playerSelection}`);
     console.log(`Computer Selects: ${computerSelection}`);
     console.log(gameRound(playerSelection, computerSelection));
-    console.log(`player score is ${score}`);
+    console.log(`Player score is: ${score}. Computer score is: ${computerScore}`);
     
 }
 
@@ -109,8 +113,21 @@ playRound();
 playRound();
 }
 
-playGame();
 
+
+function finalResult() {
+    if (score > computerScore) {
+        alert('You Won! Congrats!')
+    } else if (computerScore > score) {
+        alert('Game Over! You Lost!')
+    } else if (score == computerScore) {
+        alert('You tied somehow?')
+    }
+
+}
+
+playGame();
+finalResult();
 /*
 // running the round 5 times
 let playerScore = playGame();
