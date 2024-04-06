@@ -13,10 +13,24 @@
 
 
 <body>
+<div style="text-align: center;">
+    <h1>Rock, Paper, Scissors</h1>
+    <h1>First to 5 wins, wins the game!</h1>
+<div class="buttonsContainer">
+<button style="padding: 5px 20px; margin: 0px 10px 20px; font-size: 20px;" class="rockButton">Rock</button>
+<button style="padding: 5px 20px; margin: 0px 10px 20px; font-size: 20px;" class="paperButton">Paper</button>
+<button style="padding: 5px 20px; margin: 0px 10px 20px; font-size: 20px;" class="scissorsButton">Scissors</button>
+</div>
 
+<div class="resultOnPage">
+    <div class="playerSelectText"></div>
+    <div class="computerSelectText"></div>
+    <div class="whoBeatsWho"></div>
+    <div class="playerScoreText"></div>
+</div>
 
-
-
+<div class="gameOver"></div>
+</div>
 <script>
 /*
 step 1: generate random number between 1-3 (1 - rock, 2 - paper, 3 - scissors); store in variable
@@ -41,6 +55,7 @@ paper      vs   scissors:   scissor wins; you lose
 */
 let score = 0;
 let computerScore = 0;
+let playerSelection = '';
 
 function getComputerChoice() {
     let computerChoiceNumber = Math.floor(Math.random() * 3 + 1);
@@ -48,7 +63,7 @@ function getComputerChoice() {
         return 'Rock';
     } else if (computerChoiceNumber == 2) {
         return 'Paper';
-    } else {
+    } else if (computerChoiceNumber == 3) {
         return 'Scissors';
     }
     
@@ -81,11 +96,10 @@ function gameRound(playerSelection, computerSelection) {
         score = score + 1;
         return 'You Win! Paper beats Rock';
     } else if (playerSelection == 'paper' && computerSelection == 'scissors') {
-        return 'You Lose! Scissors beats Paper';
         computerScore = computerScore + 1;
-    } else {
-        return 'That is not an option, please try again.';
-    }
+        return 'You Lose! Scissors beats Paper';
+        
+    } 
     
 }
 
@@ -94,17 +108,27 @@ function gameRound(playerSelection, computerSelection) {
 
 // function below is the cycle of one round
 function playRound() {
-    let playerSelection = prompt('Choose One Please: Rock, Paper, or Scissors');
+    
     let computerSelection = getComputerChoice();
-    console.log(`Player Selects: ${playerSelection}`);
-    console.log(`Computer Selects: ${computerSelection}`);
-    console.log(gameRound(playerSelection, computerSelection));
-    console.log(`Player score is: ${score}. Computer score is: ${computerScore}`);
+
+
+    let playerSelectText = document.querySelector('.playerSelectText');
+    let computerSelectText = document.querySelector('.computerSelectText');
+    let whoBeatsWho = document.querySelector('.whoBeatsWho');
+    let playerScoreText = document.querySelector('.playerScoreText');
+
+    playerSelectText.textContent = `Player Selects: ${playerSelection}`;
+    computerSelectText.textContent = `Computer Selects: ${computerSelection}`;
+    whoBeatsWho.textContent = gameRound(playerSelection, computerSelection);
+    playerScoreText.textContent = `Player score is: ${score}. Computer score is: ${computerScore}`;
+
+    whoBeatsWho.style.cssText = 'font-size: 25px;';
+    playerScoreText.style.cssText = 'font-size: 25px;';
     
 }
 
 
-
+/* removing 5 round game
 function playGame() {
 playRound();
 playRound();
@@ -112,22 +136,36 @@ playRound();
 playRound();
 playRound();
 }
-
+*/
 
 
 function finalResult() {
-    if (score > computerScore) {
-        alert('You Won! Congrats!')
-    } else if (computerScore > score) {
-        alert('Game Over! You Lost!')
-    } else if (score == computerScore) {
-        alert('You tied somehow?')
-    }
+    const gameOver = document.querySelector('.gameOver');
 
+    if (score == 5 || computerScore == 5) {
+
+    
+        if (score > computerScore) {
+            alert('You Won! Congrats!')
+            gameOver.textContent = 'You Won! Congrats!';
+            gameOver.style = "background: green; color: white; font-size: 32px;";
+            
+        } else if (computerScore > score) {
+            alert('Game Over! You Lost!')
+            gameOver.textContent = 'Game Over! You Lost!';
+            gameOver.style = "background: red; color: white; font-size: 32px;";
+            
+        } else if (score == computerScore) {
+            alert('You tied somehow?')
+            gameOver.textContent = 'You tied somehow?';
+            gameOver.style = "background: yellow; font-size: 32px;";
+            
+        }
+    }
 }
 
-playGame();
-finalResult();
+
+
 /*
 // running the round 5 times
 let playerScore = playGame();
@@ -149,6 +187,47 @@ function playRound() {
 
 }
 */
+
+const buttons = document.querySelector(".buttonsContainer");
+
+
+
+const rock = document.querySelector(".rockButton");
+const paper = document.querySelector(".paperButton");
+const scissors = document.querySelector(".scissorsButton");
+
+
+
+
+
+
+buttons.addEventListener("click", () => {
+    playRound()
+    finalResult()
+})
+
+rock.addEventListener("click", () => {
+
+    playerSelection = 'Rock';
+
+});
+
+paper.addEventListener("click", () => {
+
+    playerSelection = 'Paper';
+
+});
+
+scissors.addEventListener("click", () => {
+
+    playerSelection = 'Scissors';
+
+    
+});
+
+
+
+
 </script>
 
 </body>
